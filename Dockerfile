@@ -71,6 +71,12 @@ WORKDIR /comfyui
 # Create necessary directories upfront
 RUN mkdir -p models/checkpoints models/vae models/unet models/clip
 
+RUN wget -O models/checkpoints/v1-5-pruned-emaonly.ckpt https://huggingface.co/stable-diffusion-v1-5/stable-diffusion-v1-5/resolve/main/v1-5-pruned-emaonly.ckpt
+RUN wget -O models/checkpoints/juggernaut_reborn.safetensors https://huggingface.co/KamCastle/jugg/resolve/main/juggernaut_reborn.safetensors
+RUN wget -O models/ipadapter/ip-adapter-plus_sd15.bin https://huggingface.co/h94/IP-Adapter/resolve/main/models/ip-adapter-plus_sd15.bin
+RUN wget -O models/unet/iclight_sd15_fcon.safetensors https://huggingface.co/lllyasviel/ic-light/resolve/main/iclight_sd15_fcon.safetensors
+RUN wget -O models/clip_vision/models.safetensors https://huggingface.co/h94/IP-Adapter/resolve/main/models/image_encoder/model.safetensors
+
 # Download checkpoints/vae/unet/clip models to include in image based on model type
 RUN if [ "$MODEL_TYPE" = "sdxl" ]; then \
       wget -O models/checkpoints/sd_xl_base_1.0.safetensors https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0/resolve/main/sd_xl_base_1.0.safetensors && \
